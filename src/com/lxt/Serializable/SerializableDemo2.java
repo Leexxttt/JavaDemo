@@ -5,9 +5,7 @@ import java.io.*;
 public class SerializableDemo2 {
 
     public static void main(String[] args) throws IOException {
-        Person1 p1 = new Person1();
-        p1.setName("lxxx");
-        p1.setAge(18);
+        Person1 p1 = new Person1("lxxx",18);
         System.out.println(p1);
         //将对象写入文件中
         ObjectOutputStream oss =null;

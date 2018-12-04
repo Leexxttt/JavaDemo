@@ -10,6 +10,18 @@ public class Person1 implements Externalizable {
     private String name;
     private Integer age;
 
+    /**
+     * 没有无参构造函数的时候
+     * Exception in thread "main" java.io.InvalidClassException: com.lxt.Serializable.Person1; no valid constructor
+     */
+//    private Person1() {
+//    }
+
+    public Person1(String name, Integer age) {
+        this.name = name;
+        this.age = age;
+    }
+
     public String getName() {
         return name;
     }
