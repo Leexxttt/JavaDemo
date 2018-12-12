@@ -65,6 +65,8 @@ public interface MyMap<K,V> {
      */
     Collection<V> values();
 
+    MySet<MyEntry<K, V>> entrySet();
+
     /**
      * 用来表示map中一组键值对的
      * @param <K>
