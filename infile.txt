@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>017</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <link rel="stylesheet" href="css/gb.css">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/vue.min.js"></script>
+</head>
+<body>
+<div class="container" id="app" v-cloak>
+    <!--讲师介绍-->
+    <div class="teacher-intro">
+        <div class="teacher-title">
+            <p>讲师介绍</p>
+            <div class="item"></div>
+        </div>
+        <div class="teacher-info teacher-suggest">
+            <div class="avatar">
+                <div class="head-img" :style="{backgroundImage: 'url(' + data.teacher_intro.url + ')'}"></div>
+                <div class="uname">
+                    <p>{{data.teacher_intro.name}}</p>
+                    <p>{{data.teacher_intro.position}}</p>
+                </div>
+            </div>
+            <div class="item-container">
+                <div class=" item-list-suggest" v-for="list in data.teacher_intro.person_list">
+                    <span class="circle pos-circle"></span>
+                    <div class="font-con">{{list}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--推荐语-->
+    <div class="teacher-intro">
+        <div class="teacher-title">
+            <p>推荐语</p>
+            <div class="item"></div>
+        </div>
+        <div class="teacher-info teacher-suggest">
+            <div class="item-container">
+                <div class=" item-list-suggest" v-for="item in data.recommend_list">
+                    <span class="circle pos-circle"></span>
+                    <div class="font-con">{{item}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--课程大纲-->
+    <div class="course-outline teacher-intro">
+        <div class="teacher-title">
+            <p>课程大纲</p>
+            <div class="item"></div>
+        </div>
+        <div class="course-con" v-for="item in data.outline">
+            <div class="course-title">
+                {{item.course_title}}
+                <img :src="item.url" alt="">
+            </div>
+            <div class="answer">{{item.answer}}</div>
+            <div class="course-item" v-for="courseItem in item.list">
+                <span class="pos-circle"></span>
+                <div class="font-con">{{courseItem}}</div>
+            </div>
+        </div>
+
+    </div>
+    <!--适用人群-->
+    <div class="teacher-intro">
+        <div class="teacher-title">
+            <p>适用人群</p>
+            <div class="item"></div>
+        </div>
+        <div class="teacher-info teacher-suggest">
+            <div class="item-container">
+                <div class=" item-list-suggest" v-for="item in data.fit_list">
+                    <span class="circle pos-circle"></span>
+                    <div class="font-con">{{item}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--你将获得-->
+    <div class="teacher-intro">
+        <div class="teacher-title">
+            <p>你将获得</p>
+            <div class="item"></div>
+        </div>
+        <div class="obtain-container" v-for="item in data.obtain_list">
+            <div class="obtain-item" :style="{backgroundImage: 'url(' + item.url + ')'}">
+                {{item.text}}
+            </div>
+        </div>
+    </div>
+    <!--人气反馈-->
+    <div class="teacher-intro">
+        <div class="teacher-title">
+            <p>人气反馈</p>
+            <div class="item"></div>
+        </div>
+        <div class="people-container">
+            <div class="people-item" v-for="item in data.comment_list">
+                <div class="pl">
+                    <div class="celebrity" :style="{backgroundImage: 'url(img/default.png)'}"
+                         v-if="item.url==='' "></div>
+                    <div class="celebrity" :style="{backgroundImage: 'url(' + item.url + ')'}" v-else></div>
+                </div>
+                <div class="pr">
+                    <div class="name">
+                        <div class="uname uname-center">{{item.name}}</div>
+                    </div>
+                    <div class="details">{{item.text}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--服务说明-->
+    <div class="teacher-intro">
+        <div class="teacher-title">
+            <p>服务说明</p>
+            <div class="item"></div>
+        </div>
+        <div class="teacher-info teacher-suggest">
+            <div class="item-container">
+                <div class=" item-list-suggest" v-for="item in data.explain_list">
+                    <span class="circle pos-circle"></span>
+                    <div class="font-con">{{item}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+  var app = new Vue({
+    el: '#app',
+    data() {
+      return {
+        data: {
+          teacher_intro: {
+            name: "唐兴通",
+            url: "img/avatar_sq_51.png",
+            position: "创新增长教练",
+            person_list: ["阿里巴巴商学院课程导师", "樊登读书会、一书一课社群顾问", "清华、北大等著名大学客座教授"],
+          },
+          recommend_list: ["新媒体时代，五花八门的传播形式令人应接不暇。", "大量病毒式传播案例如火如荼，自己却没有行之有效的方法论。", "到底如何精准识别目标群体，增强用户黏度，实现营销目的？","新4C法则助你实现口碑传播，破解引爆社群的奥秘！"],
+          outline: [
+            {
+              course_title: "理解社群营销，理解未来商业（上）",
+              url: "img/01@2x.png",
+              answer: "互联网营销的困局和破局之道",
+              list: ["小米如何与米粉建立情感账户", "丧茶火爆背后的文化分析", "雷神笔记本成功击中市场空白点"]
+            },
+            {
+              course_title: "理解社群营销，理解未来商业（下）",
+              url: "img/02@2x.png",
+              answer: "如何用社群有序沉淀目标群体的需求？",
+              list: ["小米反向供应聚焦用户需求", "Facebook确切估值商业价值的公式", "杜蕾斯精准挖掘潜在用户的秘诀"]
+            },
+            {
+              course_title: "场景营销，创新营销必修课（上）",
+              url: "img/03@2x.png",
+              answer: "场景在引爆社群中的价值和重要意义",
+              list: ["微信公众号推文最佳时段的依据", "脑白金用场景思维实现高销售转化率", "如何用引爆社群思维寻找灵魂伴侣"]
+            },
+            {
+              course_title: "场景营销，创新营销必修课（下）",
+              url: "img/04@2x.png",
+              answer: "如何筛选场景，提高营销效率？",
+              list: ["喜茶运用排队场景火爆北上广", "如何快速、低成本实现产品大面积覆盖", "如何借势吸引用户的高注意力"]
+            },
+            {
+              course_title: "社群营销，新商业标配（上）",
+              url: "img/05@2x.png",
+              answer: "只有深谙社群才能引爆社群",
+              list: ["孩子王社群思维的思考路径", "拼多多零流量成本完成高交易额的策略", "王者荣耀引爆手游圈的秘密"]
+            },
+            {
+              course_title: "社群营销，新商业标配（下）",
+              url: "img/06@2x.png",
+              answer: "如何构建社群，保持社群高活跃度？",
+              list: ["糖葫芦社群有效筛选人群的关键", "从海尔手机、笔记本失败的案例看社群营销", "豆瓣成功构建社群，聚焦用户群体的方法"]
+            },
+						{
+							course_title: "内容，新营销的抓手（上）",
+							url: "img/07@2x.png",
+							answer: "内容产品的商业变现之路",
+							list: ["米其林以美食沉淀用户", "白雀羚神广告刷爆朋友圈", "如何做优质内容，提高转化率"]
+						},
+						{
+							course_title: "内容，新营销的抓手（下）",
+							url: "img/08@2x.png",
+							answer: "引爆社群内容的三个方向",
+							list: ["如何撰写优质标题增加文章打开率", "如何策划高质量内容提高转发量", "如何用内容营销法则引爆社群"]
+						},
+						{
+							course_title: "连接思维，让社群指数级引爆（上）",
+							url: "img/09@2x.png",
+							answer: "如何不花钱让内容引爆目标群体",
+							list: ["连接节点决定商业价值", "如何让内容形成病毒式传播", "如何策划刷屏的现象级活动"]
+						},
+						{
+							course_title: "连接思维，让社群指数级引爆（下）",
+							url: "img/10@2x.png",
+							answer: "如何点燃人与人之间的社会关系网络",
+							list: ["可口可乐成功连接O2O的路径", "微信红包分到市场一杯羹的原因", "旅游蛙火爆朋友圈的关键要素"]
+						}
+					],
+          fit_list: ["企业家", "创业家", "营销人员","运营人员"],
+          obtain_list: [
+            {
+              url: "img/card_01.png",
+              text: "掌握场景的三个黄金法则，筛选合适的场景"
+            },
+            {
+              url: "img/card_02.png",
+              text: "学会构建社群的九种方法，增加用户黏度性"
+            },
+            {
+              url: "img/card_03.png",
+              text: "根据引爆社群内容的三大方向，写出爆款文章"
+            },
+            {
+              url: "img/card_04.png",
+              text: "熟知激发连接的四种方式，点燃人与人之间的社会关系网络"
+            }
+          ],
+          comment_list: [
+            {
+              url: "",
+              name: "带眼睛的毛毛虫",
+              post: "",
+              text: "时间、地点、需求、情绪构成了场景构建后如何实现营销目标，前三者经常被提及，情绪的因素考量很有心意。基于社群营销，打造品牌的追随者与维护者，也就是我们现在所做的所谓老业主的口碑营销，细化分析分类"
+            },
+            {
+              url: "",
+              name: "华尔街方程",
+              post: "",
+              text: "深入浅出，案例经典，让人容易理解，方法也还是有点借鉴的"
+            },
+						{
+							url: "",
+							name: "vickiyjh66",
+							post: "",
+							text: "这门课很好的阐释了当下互联网发展社群的重要性，就是看了以后针对自己所处的行业，如何进入如何开展，还是有待于思考呀。"
+						}
+          ],
+          explain_list: ["《引爆社群》为『一書一課』精品录制课程，共包含10节音视频全集，每节课配有对应课时的精华解读，兑换/购买成功即可学习。",
+            "本课程为虚拟内容服务，一经兑换/购买无法退订、转让，敬请理解。",
+            "兑换后在会期内可反复收听/收看学习；用金币购买则可永久反复学习。",
+            "版权归『一書一課』所有，严禁翻录成任何形式，严禁在任何第三方平台进行传播，违者将追究其法律责任。"]
+        }
+      }
+    },
+
+  })
+</script>
+</body>
+</html>

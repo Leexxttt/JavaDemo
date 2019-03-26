@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class Person implements Serializable {
 
+    private static final long serialVersionUID = -6012858069498899791L;
     private String name;
     private Integer age;
 
