@@ -18,5 +18,6 @@ public class TestLambda {
         });
 
         TreeSet<String> set2 = new TreeSet<>((o1,o2)->Integer.compare(o1.length(),o2.length()));
+
     }
 }
