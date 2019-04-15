@@ -1,5 +1,8 @@
 package com.lxt.tree;
 
+import java.util.ArrayDeque;
+import java.util.Queue;
+
 public class BinaryTreeOrder {
 
     /**
@@ -44,6 +47,27 @@ public class BinaryTreeOrder {
                 postOrder(node.getRight());
             }
             System.out.println(node.getData());
+        }
+    }
+
+    /**
+     * 广度优先搜索 BFS
+     */
+    public static void bfsOrder(BinaryTree node) {
+        if (node != null) {
+            Queue<BinaryTree> queue = new ArrayDeque<>();
+            queue.add(node);
+
+            while (!queue.isEmpty()) {
+                BinaryTree currentNode = queue.poll();
+                System.out.println(currentNode.getData());
+                if (currentNode.getLeft() != null) {
+                    queue.add(currentNode.getLeft());
+                }
+                if (currentNode.getRight() != null) {
+                    queue.add(currentNode.getRight());
+                }
+            }
         }
     }
 

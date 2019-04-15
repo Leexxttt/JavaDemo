@@ -107,5 +107,8 @@ public class BinaryTree {
         //后序遍历
         System.out.println("=============================================");
         BinaryTreeOrder.postOrder(nodeA);
+        //广度优先搜索
+        System.out.println("=============================================");
+        BinaryTreeOrder.bfsOrder(nodeA);
     }
 }
