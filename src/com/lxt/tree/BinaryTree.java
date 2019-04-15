@@ -1,6 +1,5 @@
 package com.lxt.tree;
 
-import org.junit.Test;
 
 public class BinaryTree {
     /**
@@ -99,5 +98,14 @@ public class BinaryTree {
         System.out.println("d:" + nodeD.getData());
         System.out.println("e:" + nodeE.getData());
         System.out.println("f:" + nodeF.getData());
+        //前序遍历
+        System.out.println("=============================================");
+        BinaryTreeOrder.preOrder(nodeA);
+        //中序遍历
+        System.out.println("=============================================");
+        BinaryTreeOrder.inOrder(nodeA);
+        //后序遍历
+        System.out.println("=============================================");
+        BinaryTreeOrder.postOrder(nodeA);
     }
 }
