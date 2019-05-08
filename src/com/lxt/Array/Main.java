@@ -1,11 +1,14 @@
 package com.lxt.Array;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.ListIterator;
 
 public class Main {
+
 
     public void test(){
         String[] sArray = new String[]{"sun","xu"};
@@ -21,11 +24,6 @@ public class Main {
         ArrayList<String> list2 = new ArrayList<>(10);
         //指定数组
         ArrayList<String> list3 = new ArrayList<String>(Arrays.asList(sArray));
-
-
-
-
-
 
         list.add("Li");
         list.add(1,"wang");

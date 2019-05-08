@@ -57,4 +57,23 @@ public class MyArray<E> implements Cloneable, Serializable, RandomAccess {
     }
 
 
+    public void clear() {
+        for (int i = 0; i < size; i++) {
+            elementData[i] = null;
+        }
+        size = 0;
+    }
+
+    public E get(int index) {
+        //检验index是否越界
+        rangeCheck(index);
+        return (E)elementData[index];
+    }
+
+    private void rangeCheck(int index) {
+        if (index >= size) {
+            throw new IndexOutOfBoundsException(index+"");
+        }
+    }
+
 }
