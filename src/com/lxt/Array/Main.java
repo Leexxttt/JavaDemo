@@ -1,5 +1,7 @@
 package com.lxt.Array;
 
+import org.junit.Test;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
@@ -10,6 +12,7 @@ import java.util.ListIterator;
 public class Main {
 
 
+    @Test
     public void test(){
         String[] sArray = new String[]{"sun","xu"};
         /**
