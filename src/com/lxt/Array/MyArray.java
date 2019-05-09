@@ -2,6 +2,8 @@ package com.lxt.Array;
 
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.ConcurrentModificationException;
+import java.util.NoSuchElementException;
 import java.util.RandomAccess;
 
 public class MyArray<E> implements Cloneable, Serializable, RandomAccess {
@@ -32,6 +34,7 @@ public class MyArray<E> implements Cloneable, Serializable, RandomAccess {
         //判断数组是否需要扩容 现在需要的最小的数组容量size+1
         ensureCapacityEnough(size + 1);
         elementData[size++] = e;
+        modeCount++;
         return true;
     }
 
@@ -69,6 +72,7 @@ public class MyArray<E> implements Cloneable, Serializable, RandomAccess {
         for (int i = 0; i < size; i++) {
             elementData[i] = null;
         }
+        modeCount++;
         size = 0;
     }
 
@@ -86,6 +90,7 @@ public class MyArray<E> implements Cloneable, Serializable, RandomAccess {
 
     public E remove(int index) {
         rangeCheck(index);
+        modeCount++;
         E oldValue = (E) elementData[index];
         int numMoved = size - 1 - index;
         if (numMoved > 0) {
@@ -139,4 +144,56 @@ public class MyArray<E> implements Cloneable, Serializable, RandomAccess {
         }
         return sb.toString();
     }
+
+    public MyIterator<E> iterator(){
+        return new Itr();
+    }
+    private transient int modeCount;
+
+    private class Itr implements MyIterator<E> {
+
+        int cursor;//下一个节点的下标
+        int lastRet = -1;//最后一个元素的下标
+        int expectedModCount = modeCount;
+
+        @Override
+        public boolean hasNext() {
+            return cursor != size;
+        }
+
+        @Override
+        public E next() {
+            checkForComodification();
+            int i = cursor;
+            if (i >= size) {
+                throw new NoSuchElementException();
+            }
+            Object[] elementData = MyArray.this.elementData;
+            if (i >= elementData.length) {
+                throw new ConcurrentModificationException();
+            }
+            cursor = i + 1;
+            lastRet = i;
+            return (E) elementData[i];
+        }
+
+        public void remove() {
+            if (lastRet < 0) {
+                throw new IllegalStateException();
+            }
+            checkForComodification();
+            MyArray.this.remove(lastRet);
+            cursor = lastRet;
+            lastRet = -1;
+            expectedModCount = modeCount;
+        }
+
+        private void checkForComodification() {
+            if (expectedModCount != modeCount) {
+                throw new ConcurrentModificationException();
+            }
+        }
+    }
+
+
 }
